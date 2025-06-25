@@ -7,15 +7,15 @@ import { GovConnectLogo } from "@/components/govconnect-logo";
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="p-4 flex justify-between items-center">
+      <header className="p-4 flex justify-between items-center z-10">
         <div className="flex items-center gap-2">
           <GovConnectLogo className="h-8 w-8" />
-          <h1 className="text-xl font-bold font-headline text-primary">GovConnect</h1>
+          <h1 className="text-xl font-bold text-primary">GovConnect</h1>
         </div>
       </header>
-      <main className="flex-grow flex items-center justify-center p-4">
-        <div className="text-center">
-          <h2 className="text-4xl md:text-6xl font-extrabold font-headline mb-4 text-primary">
+      <main className="flex-grow flex items-center justify-center p-4 has-glow-and-shapes">
+        <div className="text-center relative z-10">
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-4 text-primary">
             Your Gateway to Public Sector Careers
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
@@ -24,7 +24,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <Card className="hover:shadow-lg transition-shadow duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 font-headline">
+                <CardTitle className="flex items-center gap-2">
                   <User className="text-accent" />
                   For Students
                 </CardTitle>
@@ -42,7 +42,7 @@ export default function LandingPage() {
             </Card>
             <Card className="hover:shadow-lg transition-shadow duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 font-headline">
+                <CardTitle className="flex items-center gap-2">
                   <Briefcase className="text-accent" />
                   For Companies
                 </CardTitle>
@@ -61,7 +61,7 @@ export default function LandingPage() {
           </div>
         </div>
       </main>
-      <footer className="text-center p-4 text-sm text-muted-foreground">
+      <footer className="text-center p-4 text-sm text-muted-foreground z-10">
         © {new Date().getFullYear()} GovConnect. All Rights Reserved.
       </footer>
     </div>

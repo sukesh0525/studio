@@ -57,7 +57,7 @@ export default function StudentProfilePage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-headline">Your Profile</CardTitle>
+        <CardTitle>Your Profile</CardTitle>
         <CardDescription>
           Complete your profile to unlock job and internship opportunities. This information will be used to match you with the best roles.
         </CardDescription>

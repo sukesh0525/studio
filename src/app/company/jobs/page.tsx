@@ -69,7 +69,7 @@ export default function CompanyJobsPage() {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
-          <CardTitle className="font-headline">Manage Job Postings</CardTitle>
+          <CardTitle>Manage Job Postings</CardTitle>
           <CardDescription>
             Add new jobs and track applicants for your open positions.
           </CardDescription>
@@ -127,7 +127,7 @@ export default function CompanyJobsPage() {
               <TableRow key={index}>
                 <TableCell className="font-medium">{job.title}</TableCell>
                 <TableCell>
-                  <Badge variant={job.status === "Open" ? "default" : "secondary"} className={job.status === "Open" ? 'bg-green-500 hover:bg-green-600' : ''}>
+                  <Badge variant={job.status === "Open" ? "default" : "secondary"}>
                     {job.status}
                   </Badge>
                 </TableCell>

@@ -29,7 +29,7 @@ export default function StudentLayout({
         <SidebarHeader>
           <div className="flex items-center gap-2">
             <GovConnectLogo className="size-8 text-sidebar-foreground" />
-            <span className="text-lg font-semibold font-headline">GovConnect</span>
+            <span className="text-lg font-semibold">GovConnect</span>
           </div>
         </SidebarHeader>
         <SidebarContent>
@@ -84,7 +84,7 @@ export default function StudentLayout({
       <SidebarInset>
         <header className="flex h-14 items-center gap-4 border-b bg-card px-6">
            <SidebarTrigger className="md:hidden" />
-           <h2 className="text-lg font-semibold font-headline">Student Dashboard</h2>
+           <h2 className="text-lg font-semibold">Student Dashboard</h2>
         </header>
         <main className="flex-1 overflow-auto p-4 md:p-6">
           {children}

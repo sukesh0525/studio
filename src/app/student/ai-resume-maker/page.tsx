@@ -70,7 +70,7 @@ export default function AiResumeMakerPage() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <Card>
         <CardHeader>
-          <CardTitle className="font-headline flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2">
             <Sparkles className="text-accent" />
             AI Resume Maker
           </CardTitle>
@@ -138,7 +138,7 @@ export default function AiResumeMakerPage() {
       </Card>
       <Card>
         <CardHeader>
-          <CardTitle className="font-headline">Generated Resume</CardTitle>
+          <CardTitle>Generated Resume</CardTitle>
           <CardDescription>Review your new resume below. You can copy the text and format it in your preferred editor.</CardDescription>
         </CardHeader>
         <CardContent>
@@ -156,7 +156,7 @@ export default function AiResumeMakerPage() {
           )}
           {state.resume && (
              <div className="prose prose-sm dark:prose-invert max-w-none p-4 border rounded-md bg-muted/50 h-[600px] overflow-y-auto">
-              <pre className="whitespace-pre-wrap font-body">{state.resume}</pre>
+              <pre className="whitespace-pre-wrap font-sans">{state.resume}</pre>
             </div>
           )}
            {!isPending && !state.resume && !state.error && (

@@ -56,7 +56,7 @@ export default function CompanyProfilePage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-headline">Company Profile</CardTitle>
+        <CardTitle>Company Profile</CardTitle>
         <CardDescription>
           Provide your company details. This information will be visible to potential candidates.
         </CardDescription>

@@ -46,14 +46,14 @@ export default function StudentJobsPage() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h1 className="text-3xl font-bold font-headline">Job Opportunities</h1>
+        <h1 className="text-3xl font-bold">Job Opportunities</h1>
         <p className="text-muted-foreground">Explore career openings in various government departments and affiliated industries.</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {jobs.map((job) => (
           <Card key={job.id} className="flex flex-col">
             <CardHeader>
-              <CardTitle className="font-headline">{job.title}</CardTitle>
+              <CardTitle>{job.title}</CardTitle>
               <CardDescription className="flex items-center gap-2 pt-1"><Building className="h-4 w-4" /> {job.company}</CardDescription>
             </CardHeader>
             <CardContent className="flex-grow">
