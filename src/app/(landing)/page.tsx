@@ -21,6 +21,13 @@ export default function LandingPage() {
             Discover a universe of opportunities where innovation meets public service. GovConnect is your launchpad for a meaningful career that shapes tomorrow. Connect, innovate, and lead.
           </p>
 
+          <div className="max-w-4xl mx-auto my-16 text-left md:text-center">
+            <h3 className="text-3xl font-bold text-foreground mb-4">Choosing the Best Career Path</h3>
+            <p className="text-muted-foreground">
+                Selecting a career is one of the most significant decisions you'll make. It's not just about a job; it's about finding a path that aligns with your passions, skills, and long-term aspirations. In the public sector, you have the unique opportunity to contribute to society, drive innovation, and build a stable, rewarding future. Whether you are a recent graduate eager to make your mark or a company seeking top talent to lead the way, GovConnect provides the resources and connections to help you succeed. Explore the possibilities, find your purpose, and take the next step towards a fulfilling career.
+            </p>
+          </div>
+
           <div className="flex flex-col md:flex-row justify-center items-center gap-12 max-w-5xl mx-auto mb-24">
             {/* Graduate Circle */}
             <div className="relative flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-primary/20 via-background to-background rounded-full w-80 h-80 md:w-96 md:h-96 border-2 border-primary/30 shadow-2xl shadow-primary/20 transition-all duration-300 transform hover:scale-105 hover:shadow-primary/40">
