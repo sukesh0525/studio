@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Briefcase, User, CheckCircle2 } from "lucide-react";
 import { GovConnectLogo } from "@/components/govconnect-logo";
-import { Separator } from "@/components/ui/separator";
 
 export default function LandingPage() {
   return (
@@ -58,12 +57,10 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <Separator className="my-16 max-w-md mx-auto" />
-
-          <div className="max-w-4xl mx-auto mb-16 text-left md:text-center">
+          <div className="max-w-4xl mx-auto my-16 p-8 bg-muted/20 rounded-2xl border border-border/50 text-center shadow-lg">
             <h3 className="text-3xl font-bold text-foreground mb-4">Choosing the Best Career Path</h3>
-            <p className="text-muted-foreground">
-                Choosing a career is more than a job search; it&apos;s about defining your legacy. The public sector offers a unique arena where your ambition can fuel societal progress. At GovConnect, we bridge the gap between your potential and the nation&apos;s most impactful projects. Here, you won&apos;t just find a job—you&apos;ll discover a mission. A mission to innovate, to lead, and to build a better India. Whether you&apos;re a graduate ready to shape policy or a company scouting for the next generation of leaders, this is where your journey begins. Take the leap and transform your passion into public service.
+            <p className="text-muted-foreground max-w-3xl mx-auto">
+                Choosing a career is more than a job search; it's about defining your legacy. The public sector offers a unique arena where your ambition can fuel societal progress. At GovConnect, we bridge the gap between your potential and the nation's most impactful projects. Here, you won't just find a job—you'll discover a mission. A mission to innovate, to lead, and to build a better India. Whether you're a graduate ready to shape policy or a company scouting for the next generation of leaders, this is where your journey begins. Take the leap and transform your passion into public service.
             </p>
           </div>
         </div>
