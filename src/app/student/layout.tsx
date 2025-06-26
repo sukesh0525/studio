@@ -1,4 +1,7 @@
+'use client';
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   SidebarProvider,
   Sidebar,
@@ -12,7 +15,6 @@ import {
   SidebarInset,
 } from "@/components/ui/sidebar";
 import { GovConnectLogo } from "@/components/govconnect-logo";
-import { Button } from "@/components/ui/button";
 import { User, Briefcase, BookUser, Bot, LogOut } from "lucide-react";
 
 export default function StudentLayout({
@@ -20,8 +22,16 @@ export default function StudentLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   // In a real app, this would come from user data
   const isProfileComplete = true;
+
+   const navItems = [
+    { href: "/student/profile", label: "Profile", icon: User, disabled: false, tooltip: undefined },
+    { href: "/student/jobs", label: "Jobs", icon: Briefcase, disabled: !isProfileComplete, tooltip: !isProfileComplete ? "Complete your profile to access" : undefined },
+    { href: "/student/internships", label: "Internships", icon: BookUser, disabled: !isProfileComplete, tooltip: !isProfileComplete ? "Complete your profile to access" : undefined },
+    { href: "/student/ai-resume-maker", label: "AI Resume Maker", icon: Bot, disabled: false, tooltip: undefined },
+  ];
 
   return (
     <SidebarProvider>
@@ -34,44 +44,28 @@ export default function StudentLayout({
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <Link href="/student/profile">
-                  <User />
-                  <span>Profile</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild disabled={!isProfileComplete} tooltip={!isProfileComplete ? "Complete your profile to access" : undefined}>
-                <Link href="/student/jobs">
-                  <Briefcase />
-                  <span>Jobs</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild disabled={!isProfileComplete} tooltip={!isProfileComplete ? "Complete your profile to access" : undefined}>
-                <Link href="/student/internships">
-                  <BookUser />
-                  <span>Internships</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild>
-                <Link href="/student/ai-resume-maker">
-                  <Bot />
-                  <span>AI Resume Maker</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            {navItems.map((item) => (
+               <SidebarMenuItem key={item.href}>
+                <SidebarMenuButton 
+                  asChild 
+                  isActive={pathname === item.href} 
+                  disabled={item.disabled} 
+                  tooltip={item.tooltip}
+                  variant="outline"
+                >
+                  <Link href={item.href}>
+                    <item.icon />
+                    <span>{item.label}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton asChild variant="outline">
                 <Link href="/">
                   <LogOut />
                   <span>Sign Out</span>
