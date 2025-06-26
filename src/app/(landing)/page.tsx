@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Briefcase, User, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Briefcase, User, CheckCircle2, Unlock, Lightbulb, Building2 } from "lucide-react";
 import { GovConnectLogo } from "@/components/govconnect-logo";
 
 export default function LandingPage() {
@@ -57,11 +57,43 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="max-w-4xl mx-auto my-16 p-8 bg-muted/20 rounded-2xl border border-border/50 text-center shadow-lg">
-            <h3 className="text-3xl font-bold text-foreground mb-4">Choosing the Best Career Path</h3>
-            <p className="text-muted-foreground max-w-3xl mx-auto">
-                Choosing a career is more than a job search; it's about defining your legacy. The public sector offers a unique arena where your ambition can fuel societal progress. At GovConnect, we bridge the gap between your potential and the nation's most impactful projects. Here, you won't just find a job—you'll discover a mission. A mission to innovate, to lead, and to build a better India. Whether you're a graduate ready to shape policy or a company scouting for the next generation of leaders, this is where your journey begins. Take the leap and transform your passion into public service.
-            </p>
+          <div className="max-w-6xl mx-auto my-24 text-center">
+            <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-12">Why GovConnect?</h3>
+            <div className="grid md:grid-cols-3 gap-8 text-left">
+              <div className="flex flex-col p-6 bg-card rounded-xl border border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-primary/10 rounded-full">
+                    <Unlock className="h-8 w-8 text-primary" />
+                  </div>
+                  <h4 className="text-xl font-semibold">Unlock Potential</h4>
+                </div>
+                <p className="text-muted-foreground text-sm">
+                  We connect ambitious graduates with transformative roles where they can apply their skills, grow as professionals, and make a real-world impact from day one.
+                </p>
+              </div>
+              <div className="flex flex-col p-6 bg-card rounded-xl border border-border/50 shadow-lg hover:shadow-accent/20 transition-shadow duration-300">
+                 <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-accent/10 rounded-full">
+                    <Lightbulb className="h-8 w-8 text-accent" />
+                  </div>
+                  <h4 className="text-xl font-semibold">Drive Innovation</h4>
+                </div>
+                <p className="text-muted-foreground text-sm">
+                  Be at the forefront of public sector innovation. Work on cutting-edge projects that leverage technology to solve complex challenges and improve citizen services.
+                </p>
+              </div>
+              <div className="flex flex-col p-6 bg-card rounded-xl border border-border/50 shadow-lg hover:shadow-primary/20 transition-shadow duration-300">
+                 <div className="flex items-center gap-4 mb-4">
+                  <div className="p-3 bg-primary/10 rounded-full">
+                    <Building2 className="h-8 w-8 text-primary" />
+                  </div>
+                  <h4 className="text-xl font-semibold">Build the Nation</h4>
+                </div>
+                <p className="text-muted-foreground text-sm">
+                  Your work contributes directly to the growth and prosperity of India. Join a community of leaders dedicated to public service and national development.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </main>
