@@ -60,7 +60,7 @@ export default function LandingPage() {
           <div className="max-w-4xl mx-auto my-16 text-left md:text-center">
             <h3 className="text-3xl font-bold text-foreground mb-4">Choosing the Best Career Path</h3>
             <p className="text-muted-foreground">
-                Selecting a career is one of the most significant decisions you'll make. It's not just about a job; it's about finding a path that aligns with your passions, skills, and long-term aspirations. In the public sector, you have the unique opportunity to contribute to society, drive innovation, and build a stable, rewarding future. Whether you are a recent graduate eager to make your mark or a company seeking top talent to lead the way, GovConnect provides the resources and connections to help you succeed. Explore the possibilities, find your purpose, and take the next step towards a fulfilling career.
+                Choosing a career is more than a job search; it&apos;s about defining your legacy. The public sector offers a unique arena where your ambition can fuel societal progress. At GovConnect, we bridge the gap between your potential and the nation&apos;s most impactful projects. Here, you won&apos;t just find a job—you&apos;ll discover a mission. A mission to innovate, to lead, and to build a better India. Whether you&apos;re a graduate ready to shape policy or a company scouting for the next generation of leaders, this is where your journey begins. Take the leap and transform your passion into public service.
             </p>
           </div>
         </div>
