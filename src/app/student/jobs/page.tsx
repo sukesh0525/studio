@@ -1,7 +1,11 @@
+"use client";
+
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Users, MapPin, Building } from "lucide-react";
+import { Users, MapPin, Building, Heart } from "lucide-react";
 import { JobApplyDialog } from "@/components/job-apply-dialog";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const jobs = [
   {
@@ -11,7 +15,7 @@ const jobs = [
     location: "New Delhi",
     type: "Full-time",
     description: "Work on cutting-edge e-governance projects that impact millions of citizens. Seeking passionate developers with a strong foundation in web technologies.",
-    applicants: 128,
+    followers: 25600,
   },
   {
     id: 2,
@@ -20,7 +24,7 @@ const jobs = [
     location: "Mumbai",
     type: "Full-time",
     description: "Analyze large datasets to derive insights for public health policies. Experience with Python, R, and SQL is a must.",
-    applicants: 94,
+    followers: 18300,
   },
   {
     id: 3,
@@ -29,7 +33,7 @@ const jobs = [
     location: "Bengaluru",
     type: "Full-time",
     description: "Join the team protecting national digital assets. A great opportunity for fresh graduates to learn from the best in the field.",
-    applicants: 250,
+    followers: 45000,
   },
   {
     id: 4,
@@ -38,11 +42,20 @@ const jobs = [
     location: "Remote",
     type: "Internship",
     description: "Contribute to India's prestigious space program. This is a remote internship focused on satellite data processing.",
-    applicants: 450,
+    followers: 98000,
   }
 ];
 
 export default function StudentJobsPage() {
+  const { toast } = useToast();
+
+  const handleFollow = (companyName: string) => {
+    toast({
+      title: `Followed ${companyName}`,
+      description: `You will now receive updates from ${companyName}.`,
+    });
+  };
+
   return (
     <div className="space-y-6">
       <div className="text-center">
@@ -63,10 +76,13 @@ export default function StudentJobsPage() {
                 <Badge variant="secondary">{job.type}</Badge>
               </div>
             </CardContent>
-            <CardFooter className="flex justify-between items-center">
-              <div className="flex items-center text-sm text-muted-foreground gap-1">
-                <Users className="h-4 w-4" />
-                <span>{job.applicants} applicants</span>
+            <CardFooter className="flex justify-between items-center border-t pt-4 mt-4">
+              <div className="flex items-center text-sm text-muted-foreground gap-2">
+                  <Users className="h-4 w-4" />
+                  <span>{job.followers.toLocaleString()}</span>
+                  <Button variant="outline" size="sm" onClick={() => handleFollow(job.company)}>
+                      <Heart className="mr-2 h-4 w-4" /> Follow
+                  </Button>
               </div>
               <JobApplyDialog companyName={job.company} />
             </CardFooter>

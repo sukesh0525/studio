@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Users } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -41,6 +42,7 @@ const companyProfileSchema = z.object({
 export default function CompanyProfilePage() {
   const { toast } = useToast();
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [followers, setFollowers] = useState(142345);
 
   const form = useForm<z.infer<typeof companyProfileSchema>>({
     resolver: zodResolver(companyProfileSchema),
@@ -92,6 +94,15 @@ export default function CompanyProfilePage() {
                 />
             </div>
         </div>
+
+        <div className="mb-8 p-4 bg-muted rounded-lg flex items-center gap-4 max-w-sm">
+            <Users className="h-8 w-8 text-primary" />
+            <div>
+                <p className="text-2xl font-bold">{followers.toLocaleString()}</p>
+                <p className="text-sm text-muted-foreground">Followers</p>
+            </div>
+        </div>
+
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

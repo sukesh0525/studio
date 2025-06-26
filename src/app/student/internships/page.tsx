@@ -1,7 +1,11 @@
+"use client";
+
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Users, MapPin, Building, Calendar } from "lucide-react";
+import { Users, MapPin, Building, Calendar, Heart } from "lucide-react";
 import { JobApplyDialog } from "@/components/job-apply-dialog";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const internships = [
   {
@@ -11,7 +15,7 @@ const internships = [
     location: "Remote",
     duration: "3 Months",
     description: "Assist in research and formulation of policy papers on key national issues. Ideal for students in economics, law, or social sciences.",
-    applicants: 312,
+    followers: 12500,
   },
   {
     id: 2,
@@ -20,7 +24,7 @@ const internships = [
     location: "New Delhi",
     duration: "6 Months",
     description: "Support research on international relations and foreign policy. Requires excellent writing and analytical skills.",
-    applicants: 189,
+    followers: 8900,
   },
   {
     id: 3,
@@ -29,7 +33,7 @@ const internships = [
     location: "Work from Home",
     duration: "4 Months",
     description: "Help manage social media channels and create digital content for India's public broadcaster.",
-    applicants: 215,
+    followers: 5400,
   },
    {
     id: 4,
@@ -38,11 +42,20 @@ const internships = [
     location: "Hybrid (Pune)",
     duration: "6 Months",
     description: "Work on developing and maintaining government websites and applications. Strong knowledge of JavaScript frameworks required.",
-    applicants: 155,
+    followers: 11200,
   }
 ];
 
 export default function StudentInternshipsPage() {
+  const { toast } = useToast();
+
+  const handleFollow = (companyName: string) => {
+    toast({
+      title: `Followed ${companyName}`,
+      description: `You will now receive updates from ${companyName}.`,
+    });
+  };
+
   return (
     <div className="space-y-6">
       <div className="text-center">
@@ -63,10 +76,13 @@ export default function StudentInternshipsPage() {
                 <Badge variant="secondary" className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {internship.duration}</Badge>
               </div>
             </CardContent>
-            <CardFooter className="flex justify-between items-center">
-              <div className="flex items-center text-sm text-muted-foreground gap-1">
-                <Users className="h-4 w-4" />
-                <span>{internship.applicants} applicants</span>
+            <CardFooter className="flex justify-between items-center border-t pt-4 mt-4">
+               <div className="flex items-center text-sm text-muted-foreground gap-2">
+                  <Users className="h-4 w-4" />
+                  <span>{internship.followers.toLocaleString()}</span>
+                  <Button variant="outline" size="sm" onClick={() => handleFollow(internship.company)}>
+                      <Heart className="mr-2 h-4 w-4" /> Follow
+                  </Button>
               </div>
               <JobApplyDialog companyName={internship.company} />
             </CardFooter>
