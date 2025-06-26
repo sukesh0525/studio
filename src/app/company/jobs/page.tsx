@@ -244,26 +244,33 @@ export default function CompanyDashboardPage() {
                                     {job.status}
                                 </Badge>
                             </div>
-                            <div className="flex items-center justify-between gap-4 text-muted-foreground text-sm mt-2">
-                                <div className="flex items-center gap-2" title="Applicants">
+                            <div className="flex items-center gap-4 text-muted-foreground text-sm mt-2">
+                                <div className="flex items-center gap-1.5" title="Applicants">
                                     <Users className="h-4 w-4" />
-                                    <span>{job.applicants} Applicants</span>
+                                    <span>{job.applicants}</span>
                                 </div>
-                                <div className="flex items-center gap-2" title="Likes">
+                                <div className="flex items-center gap-1.5" title="Likes">
                                     <ThumbsUp className="h-4 w-4" />
                                     <span>{job.likes}</span>
+                                </div>
+                                <div className="flex items-center gap-1.5" title="Comments">
+                                    <MessageCircle className="h-4 w-4" />
+                                    <span>{job.comments}</span>
                                 </div>
                             </div>
 
                              <div className="flex-grow" />
-                             <Button 
-                                className="mt-4 w-full"
-                                variant="outline"
-                                onClick={() => setSelectedJob(job)}
-                             >
-                                <View className="mr-2 h-4 w-4" />
-                                Open
-                            </Button>
+                             <div className="flex justify-end mt-4">
+                                <Button 
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={() => setSelectedJob(job)}
+                                    className="text-primary hover:bg-primary/10"
+                                    aria-label="Open job details"
+                                >
+                                    <View className="h-5 w-5" />
+                                </Button>
+                             </div>
                         </div>
                     </Card>
                 ))}
