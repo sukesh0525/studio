@@ -22,9 +22,9 @@ export default function StudentLoginPage() {
     }
 
   return (
-    <Card className="mx-auto max-w-sm theme-student">
+    <Card className="mx-auto max-w-sm theme-graduate">
       <CardHeader>
-        <CardTitle className="text-2xl">Student Login</CardTitle>
+        <CardTitle className="text-2xl">Graduate Login</CardTitle>
         <CardDescription>
           Enter your email below to login to your account
         </CardDescription>

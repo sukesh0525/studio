@@ -22,10 +22,10 @@ export default function LandingPage() {
           </p>
 
           <div className="flex flex-col md:flex-row justify-center items-center gap-12 max-w-5xl mx-auto mb-24">
-            {/* Student Circle */}
+            {/* Graduate Circle */}
             <div className="relative flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-primary/20 via-background to-background rounded-full w-80 h-80 md:w-96 md:h-96 border-2 border-primary/30 shadow-2xl shadow-primary/20 transition-all duration-300 transform hover:scale-105 hover:shadow-primary/40">
               <User className="h-16 w-16 text-primary mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
-              <h3 className="text-3xl font-bold text-foreground mb-3">For Students</h3>
+              <h3 className="text-3xl font-bold text-foreground mb-3">For Graduates</h3>
               <p className="text-sm text-primary/70 mb-6 max-w-[220px]">
                 Build an AI-powered resume and find jobs or internships that match your unique skills.
               </p>

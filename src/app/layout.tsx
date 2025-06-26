@@ -10,7 +10,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'GovConnect',
-  description: 'Connecting students and companies with government opportunities.',
+  description: 'Connecting graduates and companies with government opportunities.',
 };
 
 export default function RootLayout({

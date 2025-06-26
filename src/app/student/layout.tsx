@@ -41,7 +41,7 @@ export default function StudentLayout({
   }
 
   return (
-    <SidebarProvider className="theme-student">
+    <SidebarProvider className="theme-graduate">
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center gap-2">
@@ -85,7 +85,7 @@ export default function StudentLayout({
       <SidebarInset>
         <header className="flex h-14 items-center gap-4 border-b bg-card px-6">
            <SidebarTrigger />
-           <h2 className="text-lg font-semibold">Student Dashboard</h2>
+           <h2 className="text-lg font-semibold">Graduate Dashboard</h2>
         </header>
         <main className="flex-1 overflow-auto p-4 md:p-6">
           {children}

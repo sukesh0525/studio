@@ -22,9 +22,9 @@ export default function StudentSignupPage() {
     }
 
   return (
-    <Card className="mx-auto max-w-sm theme-student">
+    <Card className="mx-auto max-w-sm theme-graduate">
       <CardHeader>
-        <CardTitle className="text-xl">Student Sign Up</CardTitle>
+        <CardTitle className="text-xl">Graduate Sign Up</CardTitle>
         <CardDescription>
           Enter your information to create an account
         </CardDescription>

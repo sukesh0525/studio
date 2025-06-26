@@ -15,7 +15,7 @@ const NewsArticleSchema = z.object({
   hint: z
     .string()
     .describe(
-      'One or two keywords for generating a relevant image, e.g., "technology students".'
+      'One or two keywords for generating a relevant image, e.g., "technology graduates".'
     ),
 });
 
@@ -37,7 +37,7 @@ const generateNewsPrompt = ai.definePrompt({
   
   Generate 3 recent-sounding, compelling news articles. Each article should consist of a title, a short description, and one or two image hint keywords. 
   
-  The topics should be relevant to students and professionals looking for government jobs, internships, and developments in public policy, technology, and infrastructure.`,
+  The topics should be relevant to graduates and professionals looking for government jobs, internships, and developments in public policy, technology, and infrastructure.`,
 });
 
 const generateNewsFlow = ai.defineFlow(
