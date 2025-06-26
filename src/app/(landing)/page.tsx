@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Briefcase, User } from "lucide-react";
+import { ArrowRight, Briefcase, User, CheckCircle2 } from "lucide-react";
 import { GovConnectLogo } from "@/components/govconnect-logo";
 
 export default function LandingPage() {
@@ -26,9 +26,12 @@ export default function LandingPage() {
             <div className="relative flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-primary/20 via-background to-background rounded-full w-80 h-80 md:w-96 md:h-96 border-2 border-primary/30 shadow-2xl shadow-primary/20 transition-all duration-300 transform hover:scale-105 hover:shadow-primary/40">
               <User className="h-16 w-16 text-primary mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
               <h3 className="text-3xl font-bold text-foreground mb-3">For Graduates</h3>
-              <p className="text-sm text-primary/70 mb-6 max-w-[220px]">
-                Build an AI-powered resume and find jobs or internships that match your unique skills.
-              </p>
+              <ul className="text-sm text-primary/80 mb-6 max-w-[240px] space-y-1.5 text-left">
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary/50" /><span>AI-Powered Resume Builder</span></li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary/50" /><span>Personalized Job Matching</span></li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary/50" /><span>Internship Opportunities</span></li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary/50" /><span>Daily Sector News</span></li>
+              </ul>
               <Link href="/student-login">
                 <Button variant="outline" className="bg-transparent border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-full px-6 group">
                   Start Your Journey <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
@@ -40,9 +43,12 @@ export default function LandingPage() {
             <div className="relative flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-accent/20 via-background to-background rounded-full w-80 h-80 md:w-96 md:h-96 border-2 border-accent/30 shadow-2xl shadow-accent/20 transition-all duration-300 transform hover:scale-105 hover:shadow-accent/40">
               <Briefcase className="h-16 w-16 text-accent mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
               <h3 className="text-3xl font-bold text-foreground mb-3">For Companies</h3>
-              <p className="text-sm text-accent/70 mb-6 max-w-[220px]">
-                Post job openings and discover the next generation of public sector leaders.
-              </p>
+              <ul className="text-sm text-accent/80 mb-6 max-w-[240px] space-y-1.5 text-left">
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent/50" /><span>Post Job Openings</span></li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent/50" /><span>AI Resume Analyzer</span></li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent/50" /><span>Discover Top Talent</span></li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent/50" /><span>Showcase Company Culture</span></li>
+              </ul>
               <Link href="/company-login">
                 <Button variant="outline" className="bg-transparent border-accent text-accent hover:bg-accent hover:text-accent-foreground rounded-full px-6 group">
                   Find Talent <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
