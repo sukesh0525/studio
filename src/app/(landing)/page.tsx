@@ -3,28 +3,30 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Briefcase, User } from "lucide-react";
 import { GovConnectLogo } from "@/components/govconnect-logo";
+import { DailyNews } from "@/components/daily-news";
+import { WeatherReport } from "@/components/weather-report";
 
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="p-4 flex justify-between items-center z-10 border-b border-border">
+      <header className="p-4 flex justify-between items-center z-20 border-b border-border bg-background/80 backdrop-blur-sm sticky top-0">
         <div className="flex items-center gap-2">
           <GovConnectLogo className="h-8 w-8" />
           <h1 className="text-xl font-bold text-primary">GovConnect</h1>
         </div>
       </header>
-      <main className="flex-grow flex items-center justify-center p-4">
-        <div className="text-center relative z-10">
-          <h2 className="text-4xl md:text-6xl font-extrabold mb-4 text-primary">
+      <main className="flex-grow p-4 md:p-8">
+        <div className="text-center relative z-10 max-w-7xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-4 text-primary tracking-tighter">
             Your Gateway to Public Sector Careers
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
             GovConnect bridges the gap between aspiring talent and opportunities in government and public sector industries. Find your path, or find the best candidates.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <Card className="bg-secondary/50 hover:bg-secondary/80 hover:shadow-lg transition-all duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+            <Card className="bg-secondary/50 hover:bg-secondary/80 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-2xl">
                   <User className="text-accent" />
                   For Students
                 </CardTitle>
@@ -40,9 +42,9 @@ export default function LandingPage() {
                 </Link>
               </CardContent>
             </Card>
-            <Card className="bg-secondary/50 hover:bg-secondary/80 hover:shadow-lg transition-all duration-300">
+            <Card className="bg-secondary/50 hover:bg-secondary/80 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-2xl">
                   <Briefcase className="text-accent" />
                   For Companies
                 </CardTitle>
@@ -59,6 +61,16 @@ export default function LandingPage() {
               </CardContent>
             </Card>
           </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <div className="lg:col-span-2">
+              <DailyNews />
+            </div>
+            <div className="lg:col-span-1">
+              <WeatherReport />
+            </div>
+          </div>
+
         </div>
       </main>
       <footer className="text-center p-4 text-sm text-muted-foreground z-10 border-t border-border">
