@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import { GovConnectLogo } from "@/components/govconnect-logo";
 import { Button } from "@/components/ui/button";
-import { Building2, LayoutDashboard, LogOut } from "lucide-react";
+import { Building2, LayoutDashboard, LogOut, FileCheck2 } from "lucide-react";
 
 export default function CompanyLayout({
   children,
@@ -44,6 +44,14 @@ export default function CompanyLayout({
                 <Link href="/company/jobs">
                   <LayoutDashboard />
                   <span>Dashboard</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild>
+                <Link href="/company/resume-analyzer">
+                  <FileCheck2 />
+                  <span>Resume Analyzer</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

@@ -15,7 +15,7 @@ import {
   SidebarInset,
 } from "@/components/ui/sidebar";
 import { GovConnectLogo } from "@/components/govconnect-logo";
-import { User, Briefcase, BookUser, Bot, LogOut, FileCheck2 } from "lucide-react";
+import { User, Briefcase, BookUser, Bot, LogOut } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function StudentLayout({
@@ -34,7 +34,6 @@ export default function StudentLayout({
     { href: "/student/jobs", label: "Jobs", icon: Briefcase, disabled: !isProfileComplete, tooltip: !isProfileComplete ? "Complete your profile to access" : undefined },
     { href: "/student/internships", label: "Internships", icon: BookUser, disabled: !isProfileComplete, tooltip: !isProfileComplete ? "Complete your profile to access" : undefined },
     { href: "/student/ai-resume-maker", label: "AI Resume Maker", icon: Bot, disabled: false, tooltip: undefined },
-    { href: "/student/resume-analyzer", label: "Resume Analyzer", icon: FileCheck2, disabled: false, tooltip: undefined },
   ];
 
   if (isMobile === null) {
