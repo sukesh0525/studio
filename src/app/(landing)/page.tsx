@@ -25,28 +25,28 @@ export default function LandingPage() {
 
           <div className="flex flex-col md:flex-row justify-center items-center gap-12 max-w-5xl mx-auto mb-24">
             {/* Student Circle */}
-            <div className="relative flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-sky-900/70 via-background to-background rounded-full w-80 h-80 md:w-96 md:h-96 border-2 border-sky-500/30 shadow-2xl shadow-sky-900/50 transition-all duration-300 transform hover:scale-105 hover:shadow-sky-700/50">
-              <User className="h-16 w-16 text-sky-400 mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
-              <h3 className="text-3xl font-bold text-white mb-3">For Students</h3>
-              <p className="text-sm text-sky-200/80 mb-6 max-w-[220px]">
+            <div className="relative flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-primary/20 via-background to-background rounded-full w-80 h-80 md:w-96 md:h-96 border-2 border-primary/30 shadow-2xl shadow-primary/20 transition-all duration-300 transform hover:scale-105 hover:shadow-primary/40">
+              <User className="h-16 w-16 text-primary mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
+              <h3 className="text-3xl font-bold text-foreground mb-3">For Students</h3>
+              <p className="text-sm text-primary/70 mb-6 max-w-[220px]">
                 Build an AI-powered resume and find jobs or internships that match your unique skills.
               </p>
               <Link href="/student-login">
-                <Button variant="outline" className="bg-transparent border-sky-400 text-sky-400 hover:bg-sky-400 hover:text-primary-foreground rounded-full px-6 group">
+                <Button variant="outline" className="bg-transparent border-primary text-primary hover:bg-primary hover:text-primary-foreground rounded-full px-6 group">
                   Start Your Journey <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
             </div>
             
             {/* Company Circle */}
-            <div className="relative flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-purple-900/70 via-background to-background rounded-full w-80 h-80 md:w-96 md:h-96 border-2 border-purple-500/30 shadow-2xl shadow-purple-900/50 transition-all duration-300 transform hover:scale-105 hover:shadow-purple-700/50">
-              <Briefcase className="h-16 w-16 text-purple-400 mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
-              <h3 className="text-3xl font-bold text-white mb-3">For Companies</h3>
-              <p className="text-sm text-purple-200/80 mb-6 max-w-[220px]">
+            <div className="relative flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-accent/20 via-background to-background rounded-full w-80 h-80 md:w-96 md:h-96 border-2 border-accent/30 shadow-2xl shadow-accent/20 transition-all duration-300 transform hover:scale-105 hover:shadow-accent/40">
+              <Briefcase className="h-16 w-16 text-accent mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
+              <h3 className="text-3xl font-bold text-foreground mb-3">For Companies</h3>
+              <p className="text-sm text-accent/70 mb-6 max-w-[220px]">
                 Post job openings and discover the next generation of public sector leaders.
               </p>
               <Link href="/company-login">
-                <Button variant="outline" className="bg-transparent border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-primary-foreground rounded-full px-6 group">
+                <Button variant="outline" className="bg-transparent border-accent text-accent hover:bg-accent hover:text-accent-foreground rounded-full px-6 group">
                   Find Talent <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
