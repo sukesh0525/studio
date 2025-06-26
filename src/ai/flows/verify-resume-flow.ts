@@ -10,12 +10,12 @@
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
-export const VerifyResumeInputSchema = z.object({
+const VerifyResumeInputSchema = z.object({
   resumeText: z.string().describe('The full text content of a resume.'),
 });
 export type VerifyResumeInput = z.infer<typeof VerifyResumeInputSchema>;
 
-export const VerifyResumeOutputSchema = z.object({
+const VerifyResumeOutputSchema = z.object({
   isGenuine: z
     .boolean()
     .describe('Whether the resume appears to be genuine and not auto-generated or placeholder content.'),
