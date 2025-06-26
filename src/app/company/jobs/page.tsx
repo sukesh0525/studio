@@ -93,12 +93,21 @@ const mockInteractions = {
     ],
 };
 
+const mockApplicants = [
+  { id: 1, name: 'Aarav Sharma', initial: 'AS', image: 'https://placehold.co/40x40.png', match: '92%' },
+  { id: 2, name: 'Diya Patel', initial: 'DP', image: 'https://placehold.co/40x40.png', match: '88%' },
+  { id: 3, name: 'Vivaan Reddy', initial: 'VR', image: 'https://placehold.co/40x40.png', match: '85%' },
+  { id: 4, name: 'Ishaan Gupta', initial: 'IG', image: 'https://placehold.co/40x40.png', match: '79%' },
+];
+
+
 export default function CompanyDashboardPage() {
   const [jobs, setJobs] = useState(initialJobs);
   const [updates, setUpdates] = useState(initialUpdates);
   const [isAddJobOpen, setIsAddJobOpen] = useState(false);
   const [isAddUpdateOpen, setIsAddUpdateOpen] = useState(false);
   const [selectedUpdate, setSelectedUpdate] = useState<(typeof initialUpdates)[0] | null>(null);
+  const [selectedJob, setSelectedJob] = useState<(typeof initialJobs)[0] | null>(null);
 
   const handleAddJob = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -231,7 +240,10 @@ export default function CompanyDashboardPage() {
                                 </Badge>
                              </div>
                              <div className="flex-grow" />
-                             <div className="flex items-center justify-between gap-4 text-muted-foreground mt-4 pt-4 border-t">
+                             <button 
+                                className="flex items-center justify-between gap-4 text-muted-foreground mt-4 pt-4 border-t w-full text-left hover:bg-muted p-2 -m-2 rounded-md transition-colors"
+                                onClick={() => setSelectedJob(job)}
+                             >
                                 <div className="flex items-center gap-2" title="Applicants">
                                 <Users className="h-4 w-4" />
                                 <span>{job.applicants}</span>
@@ -244,7 +256,7 @@ export default function CompanyDashboardPage() {
                                 <MessageCircle className="h-4 w-4" />
                                 <span>{job.comments}</span>
                                 </div>
-                            </div>
+                            </button>
                         </div>
                     </Card>
                 ))}
@@ -397,6 +409,78 @@ export default function CompanyDashboardPage() {
               </Tabs>
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setSelectedUpdate(null)}>
+                    Close
+                </Button>
+              </DialogFooter>
+            </>
+          )}
+        </DialogContent>
+    </Dialog>
+
+    <Dialog open={!!selectedJob} onOpenChange={(open) => !open && setSelectedJob(null)}>
+        <DialogContent className="sm:max-w-lg">
+         {selectedJob && (
+            <>
+              <DialogHeader>
+                <DialogTitle>Interactions for "{selectedJob.title}"</DialogTitle>
+                <DialogDescription>
+                  See applicants, likes, and comments for your job posting.
+                </DialogDescription>
+              </DialogHeader>
+              <Tabs defaultValue="applicants" className="w-full">
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="applicants">Applicants ({selectedJob.applicants})</TabsTrigger>
+                  <TabsTrigger value="likes">Likes ({selectedJob.likes})</TabsTrigger>
+                  <TabsTrigger value="comments">Comments ({selectedJob.comments})</TabsTrigger>
+                </TabsList>
+                <TabsContent value="applicants" className="mt-4 max-h-80 overflow-y-auto">
+                   <div className="space-y-4">
+                    {mockApplicants.map(applicant => (
+                      <div key={applicant.id} className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-4">
+                            <Avatar>
+                            <AvatarImage src={applicant.image} alt={applicant.name} data-ai-hint="person portrait" />
+                            <AvatarFallback>{applicant.initial}</AvatarFallback>
+                            </Avatar>
+                            <p className="font-medium">{applicant.name}</p>
+                        </div>
+                        <Badge variant="secondary">Match: {applicant.match}</Badge>
+                      </div>
+                    ))}
+                  </div>
+                </TabsContent>
+                <TabsContent value="likes" className="mt-4 max-h-80 overflow-y-auto">
+                  <div className="space-y-4">
+                    {mockInteractions.likes.map(like => (
+                      <div key={like.id} className="flex items-center gap-4">
+                        <Avatar>
+                          <AvatarImage src={like.image} alt={like.name} data-ai-hint="person portrait" />
+                          <AvatarFallback>{like.initial}</AvatarFallback>
+                        </Avatar>
+                        <p className="font-medium">{like.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </TabsContent>
+                <TabsContent value="comments" className="mt-4 max-h-80 overflow-y-auto">
+                   <div className="space-y-6">
+                    {mockInteractions.comments.map(comment => (
+                      <div key={comment.id} className="flex items-start gap-4">
+                         <Avatar>
+                          <AvatarImage src={comment.image} alt={comment.name} data-ai-hint="person portrait"/>
+                          <AvatarFallback>{comment.initial}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <p className="font-medium">{comment.name}</p>
+                          <p className="text-sm text-muted-foreground">{comment.comment}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </TabsContent>
+              </Tabs>
+              <DialogFooter>
+                <Button type="button" variant="secondary" onClick={() => setSelectedJob(null)}>
                     Close
                 </Button>
               </DialogFooter>
