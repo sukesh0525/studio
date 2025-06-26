@@ -33,7 +33,7 @@ export default function LandingPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Link href="/student/profile">
+                <Link href="/student-login">
                   <Button className="w-full">
                     Start Your Journey <ArrowRight className="ml-2" />
                   </Button>
@@ -51,7 +51,7 @@ export default function LandingPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Link href="/company/profile">
+                <Link href="/company-login">
                   <Button className="w-full">
                     Find Talent <ArrowRight className="ml-2" />
                   </Button>
