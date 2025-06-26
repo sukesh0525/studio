@@ -1,8 +1,11 @@
+
 "use client";
 
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import Image from "next/image";
 import {
   Select,
   SelectContent,
@@ -31,10 +34,13 @@ const companyProfileSchema = z.object({
   location: z.string().min(3, "Location is required."),
   workType: z.enum(["On-site", "Hybrid", "Remote"]),
   description: z.string().min(20, "Please provide a detailed company description."),
+  companyImage: z.any().optional(),
 });
 
 export default function CompanyProfilePage() {
   const { toast } = useToast();
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
   const form = useForm<z.infer<typeof companyProfileSchema>>({
     resolver: zodResolver(companyProfileSchema),
     defaultValues: {
@@ -44,6 +50,17 @@ export default function CompanyProfilePage() {
       description: "",
     },
   });
+  
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   function onSubmit(values: z.infer<typeof companyProfileSchema>) {
     console.log(values);
@@ -62,6 +79,19 @@ export default function CompanyProfilePage() {
         </CardDescription>
       </CardHeader>
       <CardContent>
+        <div className="mb-8">
+            <Label>Company Banner Image</Label>
+            <div className="mt-2 aspect-video w-full max-w-2xl relative bg-muted rounded-lg flex items-center justify-center border">
+                <Image 
+                    src={imagePreview || "https://placehold.co/800x450.png"}
+                    alt="Company banner preview"
+                    fill
+                    className="object-cover rounded-lg"
+                    data-ai-hint="office building"
+                />
+            </div>
+        </div>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -93,28 +123,48 @@ export default function CompanyProfilePage() {
               />
             </div>
             
-            <FormField
-              control={form.control}
-              name="workType"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Primary Work Model</FormLabel>
-                   <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a work model" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="On-site">On-site</SelectItem>
-                      <SelectItem value="Hybrid">Hybrid</SelectItem>
-                      <SelectItem value="Remote">Remote</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <FormField
+                control={form.control}
+                name="workType"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormLabel>Primary Work Model</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Select a work model" />
+                        </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                        <SelectItem value="On-site">On-site</SelectItem>
+                        <SelectItem value="Hybrid">Hybrid</SelectItem>
+                        <SelectItem value="Remote">Remote</SelectItem>
+                        </SelectContent>
+                    </Select>
+                    <FormMessage />
+                    </FormItem>
+                )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="companyImage"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Upload New Banner Image</FormLabel>
+                            <FormControl>
+                                <Input type="file" accept="image/*" onChange={(e) => {
+                                    field.onChange(e.target.files);
+                                    handleImageChange(e);
+                                }} />
+                            </FormControl>
+                             <FormDescription>Best ratio is 16:9.</FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+            </div>
 
             <FormField
               control={form.control}

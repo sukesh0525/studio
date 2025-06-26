@@ -1,7 +1,9 @@
+
 "use client";
 
 import { useState } from "react";
 import { PlusCircle, ThumbsUp, MessageCircle, PenSquare, Users } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -41,6 +43,8 @@ const initialJobs = [
     applicants: 42,
     likes: 120,
     comments: 15,
+    image: "https://placehold.co/400x225.png",
+    hint: "government building",
   },
   {
     title: "Cloud Infrastructure Engineer",
@@ -48,6 +52,8 @@ const initialJobs = [
     applicants: 89,
     likes: 250,
     comments: 32,
+    image: "https://placehold.co/400x225.png",
+    hint: "cloud computing",
   },
   {
     title: "Frontend Developer",
@@ -55,6 +61,8 @@ const initialJobs = [
     applicants: 153,
     likes: 98,
     comments: 21,
+    image: "https://placehold.co/400x225.png",
+    hint: "developer code",
   },
 ];
 
@@ -84,7 +92,15 @@ export default function CompanyDashboardPage() {
     if (title) {
       setJobs((prev) => [
         ...prev,
-        { title, status: "Open", applicants: 0, likes: 0, comments: 0 },
+        {
+          title,
+          status: "Open",
+          applicants: 0,
+          likes: 0,
+          comments: 0,
+          image: "https://placehold.co/400x225.png",
+          hint: "office team",
+        },
       ]);
     }
     setIsAddJobOpen(false);
@@ -153,6 +169,18 @@ export default function CompanyDashboardPage() {
                         placeholder="Job responsibilities, requirements..."
                       />
                     </div>
+                     <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="image" className="text-right">
+                        Image
+                      </Label>
+                      <Input
+                        id="image"
+                        name="image"
+                        type="file"
+                        className="col-span-3"
+                        accept="image/*"
+                      />
+                    </div>
                   </div>
                   <DialogFooter>
                     <DialogClose asChild>
@@ -167,45 +195,44 @@ export default function CompanyDashboardPage() {
             </Dialog>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[50%]">Job Title</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-center">Stats</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {jobs.map((job, index) => (
-                  <TableRow key={index}>
-                    <TableCell className="font-medium">{job.title}</TableCell>
-                    <TableCell>
-                      <Badge
-                        variant={job.status === "Open" ? "default" : "secondary"}
-                      >
-                        {job.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center justify-center gap-6 text-muted-foreground">
-                        <div className="flex items-center gap-2" title="Applicants">
-                          <Users className="h-4 w-4" />
-                          <span>{job.applicants}</span>
+                    <Card key={index} className="flex flex-col overflow-hidden">
+                        <div className="aspect-video relative">
+                            <Image
+                                src={job.image}
+                                alt={job.title}
+                                fill
+                                className="object-cover"
+                                data-ai-hint={job.hint}
+                            />
                         </div>
-                        <div className="flex items-center gap-2" title="Likes">
-                          <ThumbsUp className="h-4 w-4" />
-                          <span>{job.likes}</span>
+                        <div className="p-4 flex flex-col flex-grow">
+                             <h3 className="font-semibold text-lg">{job.title}</h3>
+                             <div className="my-2">
+                                <Badge variant={job.status === "Open" ? "default" : "secondary"}>
+                                    {job.status}
+                                </Badge>
+                             </div>
+                             <div className="flex-grow" />
+                             <div className="flex items-center justify-between gap-4 text-muted-foreground mt-4 pt-4 border-t">
+                                <div className="flex items-center gap-2" title="Applicants">
+                                <Users className="h-4 w-4" />
+                                <span>{job.applicants}</span>
+                                </div>
+                                <div className="flex items-center gap-2" title="Likes">
+                                <ThumbsUp className="h-4 w-4" />
+                                <span>{job.likes}</span>
+                                </div>
+                                <div className="flex items-center gap-2" title="Comments">
+                                <MessageCircle className="h-4 w-4" />
+                                <span>{job.comments}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-2" title="Comments">
-                          <MessageCircle className="h-4 w-4" />
-                          <span>{job.comments}</span>
-                        </div>
-                      </div>
-                    </TableCell>
-                  </TableRow>
+                    </Card>
                 ))}
-              </TableBody>
-            </Table>
+            </div>
           </CardContent>
         </Card>
       </TabsContent>
