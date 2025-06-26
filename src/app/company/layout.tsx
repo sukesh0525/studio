@@ -21,7 +21,7 @@ export default function CompanyLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider>
+    <SidebarProvider className="theme-company">
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center gap-2">

@@ -41,7 +41,7 @@ export default function StudentLayout({
   }
 
   return (
-    <SidebarProvider>
+    <SidebarProvider className="theme-student">
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center gap-2">
