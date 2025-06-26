@@ -77,7 +77,7 @@ export default function StudentLayout({
       </Sidebar>
       <SidebarInset>
         <header className="flex h-14 items-center gap-4 border-b bg-card px-6">
-           <SidebarTrigger className="md:hidden" />
+           <SidebarTrigger />
            <h2 className="text-lg font-semibold">Student Dashboard</h2>
         </header>
         <main className="flex-1 overflow-auto p-4 md:p-6">
