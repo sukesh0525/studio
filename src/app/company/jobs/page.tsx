@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { PlusCircle, ThumbsUp, MessageCircle, PenSquare, Users } from "lucide-react";
+import { PlusCircle, ThumbsUp, MessageCircle, PenSquare, Users, View } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -46,6 +46,7 @@ const initialJobs = [
     comments: 15,
     image: "https://placehold.co/400x225.png",
     hint: "government building",
+    description: "Seeking a seasoned Senior Policy Advisor to lead our strategic initiatives and provide expert guidance on legislative matters. The ideal candidate will have extensive experience in public policy analysis and a proven track record of influencing policy decisions at a national level.",
   },
   {
     title: "Cloud Infrastructure Engineer",
@@ -55,6 +56,7 @@ const initialJobs = [
     comments: 32,
     image: "https://placehold.co/400x225.png",
     hint: "cloud computing",
+    description: "Join our team to design, build, and maintain our scalable cloud infrastructure. You will be responsible for deploying and managing cloud services, ensuring high availability, and implementing security best practices. Experience with AWS or Azure is required.",
   },
   {
     title: "Frontend Developer",
@@ -64,6 +66,7 @@ const initialJobs = [
     comments: 21,
     image: "https://placehold.co/400x225.png",
     hint: "developer code",
+    description: "We are looking for a talented Frontend Developer to create beautiful and responsive user interfaces for our public-facing applications. You will work with modern frameworks like React and Next.js to build user-centric features that impact millions of citizens.",
   },
 ];
 
@@ -113,11 +116,13 @@ export default function CompanyDashboardPage() {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const title = formData.get("title") as string;
+    const description = formData.get("description") as string;
     if (title) {
       setJobs((prev) => [
         ...prev,
         {
           title,
+          description: description || "No description provided.",
           status: "Open",
           applicants: 0,
           likes: 0,
@@ -234,29 +239,31 @@ export default function CompanyDashboardPage() {
                         </div>
                         <div className="p-4 flex flex-col flex-grow">
                              <h3 className="font-semibold text-lg">{job.title}</h3>
-                             <div className="my-2">
+                            <div className="my-2">
                                 <Badge variant={job.status === "Open" ? "default" : "secondary"}>
                                     {job.status}
                                 </Badge>
-                             </div>
-                             <div className="flex-grow" />
-                             <button 
-                                className="flex items-center justify-between gap-4 text-muted-foreground mt-4 pt-4 border-t w-full text-left hover:bg-muted p-2 -m-2 rounded-md transition-colors"
-                                onClick={() => setSelectedJob(job)}
-                             >
+                            </div>
+                            <div className="flex items-center justify-between gap-4 text-muted-foreground text-sm mt-2">
                                 <div className="flex items-center gap-2" title="Applicants">
-                                <Users className="h-4 w-4" />
-                                <span>{job.applicants}</span>
+                                    <Users className="h-4 w-4" />
+                                    <span>{job.applicants} Applicants</span>
                                 </div>
                                 <div className="flex items-center gap-2" title="Likes">
-                                <ThumbsUp className="h-4 w-4" />
-                                <span>{job.likes}</span>
+                                    <ThumbsUp className="h-4 w-4" />
+                                    <span>{job.likes}</span>
                                 </div>
-                                <div className="flex items-center gap-2" title="Comments">
-                                <MessageCircle className="h-4 w-4" />
-                                <span>{job.comments}</span>
-                                </div>
-                            </button>
+                            </div>
+
+                             <div className="flex-grow" />
+                             <Button 
+                                className="mt-4 w-full"
+                                variant="outline"
+                                onClick={() => setSelectedJob(job)}
+                             >
+                                <View className="mr-2 h-4 w-4" />
+                                Open
+                            </Button>
                         </div>
                     </Card>
                 ))}
@@ -418,67 +425,85 @@ export default function CompanyDashboardPage() {
     </Dialog>
 
     <Dialog open={!!selectedJob} onOpenChange={(open) => !open && setSelectedJob(null)}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="sm:max-w-2xl">
          {selectedJob && (
             <>
               <DialogHeader>
-                <DialogTitle>Interactions for "{selectedJob.title}"</DialogTitle>
+                <DialogTitle>{selectedJob.title}</DialogTitle>
                 <DialogDescription>
-                  See applicants, likes, and comments for your job posting.
+                  <Badge variant={selectedJob.status === "Open" ? "default" : "secondary"}>
+                    {selectedJob.status}
+                  </Badge>
                 </DialogDescription>
               </DialogHeader>
-              <Tabs defaultValue="applicants" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="applicants">Applicants ({selectedJob.applicants})</TabsTrigger>
-                  <TabsTrigger value="likes">Likes ({selectedJob.likes})</TabsTrigger>
-                  <TabsTrigger value="comments">Comments ({selectedJob.comments})</TabsTrigger>
-                </TabsList>
-                <TabsContent value="applicants" className="mt-4 max-h-80 overflow-y-auto">
-                   <div className="space-y-4">
-                    {mockApplicants.map(applicant => (
-                      <div key={applicant.id} className="flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-4">
+              <div className="max-h-[calc(80vh-10rem)] overflow-y-auto pr-2 space-y-4">
+                <div className="aspect-video relative rounded-lg overflow-hidden">
+                    <Image
+                        src={selectedJob.image}
+                        alt={selectedJob.title}
+                        fill
+                        className="object-cover"
+                        data-ai-hint={selectedJob.hint}
+                    />
+                </div>
+                <div>
+                    <h4 className="font-semibold mb-2">Job Description</h4>
+                    <p className="text-sm text-muted-foreground">{selectedJob.description}</p>
+                </div>
+
+                <Tabs defaultValue="applicants" className="w-full pt-4">
+                    <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger value="applicants">Applicants ({selectedJob.applicants})</TabsTrigger>
+                    <TabsTrigger value="likes">Likes ({selectedJob.likes})</TabsTrigger>
+                    <TabsTrigger value="comments">Comments ({selectedJob.comments})</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="applicants" className="mt-4 max-h-60 overflow-y-auto">
+                    <div className="space-y-4">
+                        {mockApplicants.map(applicant => (
+                        <div key={applicant.id} className="flex items-center justify-between gap-4">
+                            <div className="flex items-center gap-4">
+                                <Avatar>
+                                <AvatarImage src={applicant.image} alt={applicant.name} data-ai-hint="person portrait" />
+                                <AvatarFallback>{applicant.initial}</AvatarFallback>
+                                </Avatar>
+                                <p className="font-medium">{applicant.name}</p>
+                            </div>
+                            <Badge variant="secondary">Match: {applicant.match}</Badge>
+                        </div>
+                        ))}
+                    </div>
+                    </TabsContent>
+                    <TabsContent value="likes" className="mt-4 max-h-60 overflow-y-auto">
+                    <div className="space-y-4">
+                        {mockInteractions.likes.map(like => (
+                        <div key={like.id} className="flex items-center gap-4">
                             <Avatar>
-                            <AvatarImage src={applicant.image} alt={applicant.name} data-ai-hint="person portrait" />
-                            <AvatarFallback>{applicant.initial}</AvatarFallback>
+                            <AvatarImage src={like.image} alt={like.name} data-ai-hint="person portrait" />
+                            <AvatarFallback>{like.initial}</AvatarFallback>
                             </Avatar>
-                            <p className="font-medium">{applicant.name}</p>
+                            <p className="font-medium">{like.name}</p>
                         </div>
-                        <Badge variant="secondary">Match: {applicant.match}</Badge>
-                      </div>
-                    ))}
-                  </div>
-                </TabsContent>
-                <TabsContent value="likes" className="mt-4 max-h-80 overflow-y-auto">
-                  <div className="space-y-4">
-                    {mockInteractions.likes.map(like => (
-                      <div key={like.id} className="flex items-center gap-4">
-                        <Avatar>
-                          <AvatarImage src={like.image} alt={like.name} data-ai-hint="person portrait" />
-                          <AvatarFallback>{like.initial}</AvatarFallback>
-                        </Avatar>
-                        <p className="font-medium">{like.name}</p>
-                      </div>
-                    ))}
-                  </div>
-                </TabsContent>
-                <TabsContent value="comments" className="mt-4 max-h-80 overflow-y-auto">
-                   <div className="space-y-6">
-                    {mockInteractions.comments.map(comment => (
-                      <div key={comment.id} className="flex items-start gap-4">
-                         <Avatar>
-                          <AvatarImage src={comment.image} alt={comment.name} data-ai-hint="person portrait"/>
-                          <AvatarFallback>{comment.initial}</AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1">
-                          <p className="font-medium">{comment.name}</p>
-                          <p className="text-sm text-muted-foreground">{comment.comment}</p>
+                        ))}
+                    </div>
+                    </TabsContent>
+                    <TabsContent value="comments" className="mt-4 max-h-60 overflow-y-auto">
+                    <div className="space-y-6">
+                        {mockInteractions.comments.map(comment => (
+                        <div key={comment.id} className="flex items-start gap-4">
+                            <Avatar>
+                            <AvatarImage src={comment.image} alt={comment.name} data-ai-hint="person portrait"/>
+                            <AvatarFallback>{comment.initial}</AvatarFallback>
+                            </Avatar>
+                            <div className="flex-1">
+                            <p className="font-medium">{comment.name}</p>
+                            <p className="text-sm text-muted-foreground">{comment.comment}</p>
+                            </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                </TabsContent>
-              </Tabs>
+                        ))}
+                    </div>
+                    </TabsContent>
+                </Tabs>
+              </div>
               <DialogFooter>
                 <Button type="button" variant="secondary" onClick={() => setSelectedJob(null)}>
                     Close
