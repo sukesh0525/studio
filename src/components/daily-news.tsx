@@ -1,9 +1,23 @@
+"use client";
+
+import { useState, useTransition } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Newspaper } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Loader2, Newspaper, RefreshCw } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { generateNews } from "@/ai/flows/generate-news-flow";
+import { useToast } from "@/hooks/use-toast";
 
-const newsItems = [
+type NewsItem = {
+  title: string;
+  description: string;
+  image: string;
+  hint: string;
+  link: string;
+};
+
+const initialNewsItems: NewsItem[] = [
   {
     title: "Government Announces New Skill India Mission for Tech Graduates",
     description: "The initiative aims to upskill over 1 million young Indians in emerging technologies like AI, blockchain, and cybersecurity.",
@@ -28,13 +42,47 @@ const newsItems = [
 ];
 
 export function DailyNews() {
+  const [newsItems, setNewsItems] = useState<NewsItem[]>(initialNewsItems);
+  const [isPending, startTransition] = useTransition();
+  const { toast } = useToast();
+
+  const handleRefreshNews = () => {
+    startTransition(async () => {
+      try {
+        const result = await generateNews();
+        const newItems = result.articles.map(article => ({
+          ...article,
+          image: "https://placehold.co/600x400.png",
+          link: "#"
+        }));
+        setNewsItems(newItems);
+      } catch (e) {
+        console.error(e);
+        toast({
+          title: "Error Refreshing News",
+          description: "Could not fetch the latest news. Please try again later.",
+          variant: "destructive",
+        });
+      }
+    });
+  };
+
+
   return (
     <Card className="w-full h-full border-primary/20 bg-secondary/30">
-      <CardHeader>
+      <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="flex items-center gap-2">
           <Newspaper className="text-primary" />
           Latest Sector News
         </CardTitle>
+        <Button variant="ghost" size="icon" onClick={handleRefreshNews} disabled={isPending}>
+          {isPending ? (
+            <Loader2 className="h-4 w-4 animate-spin" />
+          ) : (
+            <RefreshCw className="h-4 w-4" />
+          )}
+          <span className="sr-only">Refresh News</span>
+        </Button>
       </CardHeader>
       <CardContent className="grid gap-6">
         {newsItems.map((item, index) => (
