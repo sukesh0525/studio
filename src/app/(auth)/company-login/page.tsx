@@ -22,7 +22,7 @@ export default function CompanyLoginPage() {
     }
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto max-w-sm theme-company">
       <CardHeader>
         <CardTitle className="text-2xl">Company Login</CardTitle>
         <CardDescription>

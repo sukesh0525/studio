@@ -22,7 +22,7 @@ export default function StudentLoginPage() {
     }
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto max-w-sm theme-student">
       <CardHeader>
         <CardTitle className="text-2xl">Student Login</CardTitle>
         <CardDescription>

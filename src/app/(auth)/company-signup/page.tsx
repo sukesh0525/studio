@@ -22,7 +22,7 @@ export default function CompanySignupPage() {
     }
 
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="mx-auto max-w-sm theme-company">
       <CardHeader>
         <CardTitle className="text-xl">Company Sign Up</CardTitle>
         <CardDescription>
