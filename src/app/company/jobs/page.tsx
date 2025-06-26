@@ -238,29 +238,12 @@ export default function CompanyDashboardPage() {
                             />
                         </div>
                         <div className="p-4 flex flex-col flex-grow">
-                             <h3 className="font-semibold text-lg">{job.title}</h3>
-                            <div className="my-2">
+                             <h3 className="font-semibold text-lg mb-2">{job.title}</h3>
+                             <div className="flex-grow" />
+                             <div className="flex justify-between items-center mt-4 pt-4 border-t">
                                 <Badge variant={job.status === "Open" ? "default" : "secondary"}>
                                     {job.status}
                                 </Badge>
-                            </div>
-                            <div className="flex items-center gap-4 text-muted-foreground text-sm mt-2">
-                                <div className="flex items-center gap-1.5" title="Applicants">
-                                    <Users className="h-4 w-4" />
-                                    <span>{job.applicants}</span>
-                                </div>
-                                <div className="flex items-center gap-1.5" title="Likes">
-                                    <ThumbsUp className="h-4 w-4" />
-                                    <span>{job.likes}</span>
-                                </div>
-                                <div className="flex items-center gap-1.5" title="Comments">
-                                    <MessageCircle className="h-4 w-4" />
-                                    <span>{job.comments}</span>
-                                </div>
-                            </div>
-
-                             <div className="flex-grow" />
-                             <div className="flex justify-end mt-4">
                                 <Button 
                                     variant="ghost"
                                     size="icon"
