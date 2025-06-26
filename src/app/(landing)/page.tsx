@@ -54,15 +54,13 @@ export default function LandingPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-2">
               <DailyNews />
-            </div>
-            <div className="lg:col-span-1">
-              <WeatherReport />
             </div>
           </div>
 
         </div>
+        <WeatherReport />
       </main>
       <footer className="text-center p-4 text-sm text-muted-foreground z-10 border-t border-border">
         © {new Date().getFullYear()} GovConnect. All Rights Reserved.
