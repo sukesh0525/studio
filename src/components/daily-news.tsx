@@ -11,6 +11,8 @@ import { useToast } from "@/hooks/use-toast";
 import {
   Dialog,
   DialogContent,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 
@@ -71,6 +73,9 @@ export function DailyNews() {
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-4xl">
+        <DialogHeader className="sr-only">
+          <DialogTitle>Latest Sector News</DialogTitle>
+        </DialogHeader>
          <Card className="w-full h-full border-none shadow-none">
             <CardHeader className="flex flex-row items-center justify-between p-4">
                 <CardTitle className="flex items-center gap-2 text-lg">
