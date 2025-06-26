@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { PlusCircle, ThumbsUp, MessageCircle, PenSquare, Users, View } from "lucide-react";
+import { PlusCircle, ThumbsUp, MessageCircle, PenSquare, Users, View, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +15,17 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import {
   Table,
   TableBody,
@@ -119,7 +130,6 @@ export default function CompanyDashboardPage() {
     const description = formData.get("description") as string;
     if (title) {
       setJobs((prev) => [
-        ...prev,
         {
           title,
           description: description || "No description provided.",
@@ -130,6 +140,7 @@ export default function CompanyDashboardPage() {
           image: "https://placehold.co/400x225.png",
           hint: "office team",
         },
+        ...prev,
       ]);
     }
     setIsAddJobOpen(false);
@@ -140,9 +151,17 @@ export default function CompanyDashboardPage() {
     const formData = new FormData(event.currentTarget);
     const title = formData.get("title") as string;
     if (title) {
-      setUpdates((prev) => [...prev, { title, likes: 0, comments: 0 }]);
+      setUpdates((prev) => [{ title, likes: 0, comments: 0 }, ...prev]);
     }
     setIsAddUpdateOpen(false);
+  };
+
+  const handleDeleteJob = (jobIndex: number) => {
+    setJobs((prev) => prev.filter((_, index) => index !== jobIndex));
+  };
+
+  const handleDeleteUpdate = (updateIndex: number) => {
+    setUpdates((prev) => prev.filter((_, index) => index !== updateIndex));
   };
 
   return (
@@ -259,15 +278,43 @@ export default function CompanyDashboardPage() {
 
                              <div className="flex-grow" />
                              
-                            <Button 
-                                variant="ghost"
-                                size="icon"
-                                onClick={() => setSelectedJob(job)}
-                                className="absolute bottom-4 right-4 text-primary hover:bg-primary/10"
-                                aria-label="Open job details"
-                            >
-                                <View className="h-5 w-5" />
-                            </Button>
+                            <div className="absolute bottom-4 right-4 flex items-center gap-1">
+                              <Button 
+                                  variant="ghost"
+                                  size="icon"
+                                  onClick={() => setSelectedJob(job)}
+                                  className="text-primary hover:bg-primary/10"
+                                  aria-label="Open job details"
+                              >
+                                  <View className="h-5 w-5" />
+                              </Button>
+                              <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="text-destructive hover:bg-destructive/10"
+                                    aria-label="Delete job"
+                                  >
+                                    <Trash2 className="h-5 w-5" />
+                                  </Button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                  <AlertDialogHeader>
+                                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                      This action cannot be undone. This will permanently delete this job posting.
+                                    </AlertDialogDescription>
+                                  </AlertDialogHeader>
+                                  <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction onClick={() => handleDeleteJob(index)}>
+                                      Delete
+                                    </AlertDialogAction>
+                                  </AlertDialogFooter>
+                                </AlertDialogContent>
+                              </AlertDialog>
+                            </div>
                         </div>
                     </Card>
                 ))}
@@ -339,8 +386,9 @@ export default function CompanyDashboardPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[70%]">Post Title</TableHead>
-                  <TableHead className="text-center">Stats</TableHead>
+                  <TableHead className="w-[60%]">Post Title</TableHead>
+                  <TableHead className="w-[20%] text-center">Stats</TableHead>
+                  <TableHead className="w-[20%] text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -363,6 +411,29 @@ export default function CompanyDashboardPage() {
                                 <span>{update.comments}</span>
                             </div>
                         </button>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="ghost" size="icon" className="text-destructive hover:bg-destructive/10" aria-label="Delete update">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will permanently delete this company update.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => handleDeleteUpdate(index)}>
+                              Delete
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </TableCell>
                   </TableRow>
                 ))}
