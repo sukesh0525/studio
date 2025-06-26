@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Briefcase, User } from "lucide-react";
 import { GovConnectLogo } from "@/components/govconnect-logo";
@@ -17,49 +16,41 @@ export default function LandingPage() {
       </header>
       <main className="flex-grow p-4 md:p-8">
         <div className="text-center relative z-10 max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-extrabold mb-4 text-primary tracking-tighter">
-            Your Gateway to Public Sector Careers
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+            Forge Your Future in the Public Sector
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-            GovConnect bridges the gap between aspiring talent and opportunities in government and public sector industries. Find your path, or find the best candidates.
+          <p className="text-lg md:text-xl text-muted-foreground mb-16 max-w-3xl mx-auto">
+            Discover a universe of opportunities where innovation meets public service. GovConnect is your launchpad for a meaningful career that shapes tomorrow. Connect, innovate, and lead.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
-            <Card className="bg-secondary/50 hover:bg-secondary/80 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-2xl">
-                  <User className="text-accent" />
-                  For Students
-                </CardTitle>
-                <CardDescription>
-                  Create your profile, build a professional resume with AI, and find jobs or internships that match your skills.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Link href="/student-login">
-                  <Button className="w-full">
-                    Start Your Journey <ArrowRight className="ml-2" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-            <Card className="bg-secondary/50 hover:bg-secondary/80 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-2xl">
-                  <Briefcase className="text-accent" />
-                  For Companies
-                </CardTitle>
-                <CardDescription>
-                  Post job openings, manage applications, and discover the next generation of public sector leaders.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Link href="/company-login">
-                  <Button className="w-full">
-                    Find Talent <ArrowRight className="ml-2" />
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+
+          <div className="flex flex-col md:flex-row justify-center items-center gap-12 max-w-5xl mx-auto mb-24">
+            {/* Student Circle */}
+            <div className="relative flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-sky-900/70 via-background to-background rounded-full w-80 h-80 md:w-96 md:h-96 border-2 border-sky-500/30 shadow-2xl shadow-sky-900/50 transition-all duration-300 transform hover:scale-105 hover:shadow-sky-700/50">
+              <User className="h-16 w-16 text-sky-400 mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
+              <h3 className="text-3xl font-bold text-white mb-3">For Students</h3>
+              <p className="text-sm text-sky-200/80 mb-6 max-w-[220px]">
+                Build an AI-powered resume and find jobs or internships that match your unique skills.
+              </p>
+              <Link href="/student-login">
+                <Button variant="outline" className="bg-transparent border-sky-400 text-sky-400 hover:bg-sky-400 hover:text-primary-foreground rounded-full px-6 group">
+                  Start Your Journey <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
+            
+            {/* Company Circle */}
+            <div className="relative flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-purple-900/70 via-background to-background rounded-full w-80 h-80 md:w-96 md:h-96 border-2 border-purple-500/30 shadow-2xl shadow-purple-900/50 transition-all duration-300 transform hover:scale-105 hover:shadow-purple-700/50">
+              <Briefcase className="h-16 w-16 text-purple-400 mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" />
+              <h3 className="text-3xl font-bold text-white mb-3">For Companies</h3>
+              <p className="text-sm text-purple-200/80 mb-6 max-w-[220px]">
+                Post job openings and discover the next generation of public sector leaders.
+              </p>
+              <Link href="/company-login">
+                <Button variant="outline" className="bg-transparent border-purple-400 text-purple-400 hover:bg-purple-400 hover:text-primary-foreground rounded-full px-6 group">
+                  Find Talent <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
