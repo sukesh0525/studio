@@ -1,7 +1,14 @@
+import { ScrollToTop } from "@/components/scroll-to-top";
+
 export default function LandingLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="min-h-screen bg-background">{children}</div>;
+  return (
+    <div className="min-h-screen bg-background">
+      {children}
+      <ScrollToTop />
+    </div>
+  );
 }
