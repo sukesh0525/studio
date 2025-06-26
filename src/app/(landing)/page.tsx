@@ -2,8 +2,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Briefcase, User } from "lucide-react";
 import { GovConnectLogo } from "@/components/govconnect-logo";
-import { DailyNews } from "@/components/daily-news";
-import { WeatherReport } from "@/components/weather-report";
 
 export default function LandingPage() {
   return (
@@ -52,15 +50,7 @@ export default function LandingPage() {
               </Link>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            <div className="lg:col-span-2">
-              <DailyNews />
-            </div>
-          </div>
-
         </div>
-        <WeatherReport />
       </main>
       <footer className="text-center p-4 text-sm text-muted-foreground z-10 border-t border-border">
         © {new Date().getFullYear()} GovConnect. All Rights Reserved.
