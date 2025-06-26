@@ -35,6 +35,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const initialJobs = [
   {
@@ -79,11 +80,25 @@ const initialUpdates = [
   },
 ];
 
+const mockInteractions = {
+    likes: [
+      { id: 1, name: 'Sonia Sharma', initial: 'SS', image: 'https://placehold.co/40x40.png' },
+      { id: 2, name: 'Rajesh Kumar', initial: 'RK', image: 'https://placehold.co/40x40.png' },
+      { id: 3, name: 'Anjali Mehta', initial: 'AM', image: 'https://placehold.co/40x40.png' },
+      { id: 4, name: 'Rohan Gupta', initial: 'RG', image: 'https://placehold.co/40x40.png' },
+    ],
+    comments: [
+      { id: 1, name: 'Vikram Singh', image: 'https://placehold.co/40x40.png', initial: 'VS', comment: 'This is a fantastic initiative! Really looking forward to the impact it will make.' },
+      { id: 2, name: 'Priya Desai', image: 'https://placehold.co/40x40.png', initial: 'PD', comment: 'Great update! Can we get more details on the application process?' },
+    ],
+};
+
 export default function CompanyDashboardPage() {
   const [jobs, setJobs] = useState(initialJobs);
   const [updates, setUpdates] = useState(initialUpdates);
   const [isAddJobOpen, setIsAddJobOpen] = useState(false);
   const [isAddUpdateOpen, setIsAddUpdateOpen] = useState(false);
+  const [selectedUpdate, setSelectedUpdate] = useState<(typeof initialUpdates)[0] | null>(null);
 
   const handleAddJob = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -117,6 +132,7 @@ export default function CompanyDashboardPage() {
   };
 
   return (
+    <>
     <Tabs defaultValue="jobs" className="w-full">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="jobs">Job Postings</TabsTrigger>
@@ -311,7 +327,10 @@ export default function CompanyDashboardPage() {
                       {update.title}
                     </TableCell>
                      <TableCell>
-                        <div className="flex items-center justify-center gap-6 text-muted-foreground">
+                         <button
+                            className="flex items-center justify-center gap-6 text-muted-foreground w-full hover:bg-muted p-2 rounded-md transition-colors"
+                            onClick={() => setSelectedUpdate(update)}
+                          >
                             <div className="flex items-center gap-2" title="Likes">
                                 <ThumbsUp className="h-4 w-4" />
                                 <span>{update.likes}</span>
@@ -320,7 +339,7 @@ export default function CompanyDashboardPage() {
                                 <MessageCircle className="h-4 w-4" />
                                 <span>{update.comments}</span>
                             </div>
-                        </div>
+                        </button>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -330,5 +349,61 @@ export default function CompanyDashboardPage() {
         </Card>
       </TabsContent>
     </Tabs>
+    
+    <Dialog open={!!selectedUpdate} onOpenChange={(open) => !open && setSelectedUpdate(null)}>
+        <DialogContent className="sm:max-w-md">
+         {selectedUpdate && (
+            <>
+              <DialogHeader>
+                <DialogTitle>Interactions for "{selectedUpdate.title}"</DialogTitle>
+                <DialogDescription>
+                  See who liked and commented on your update.
+                </DialogDescription>
+              </DialogHeader>
+              <Tabs defaultValue="likes" className="w-full">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="likes">Likes ({selectedUpdate.likes})</TabsTrigger>
+                  <TabsTrigger value="comments">Comments ({selectedUpdate.comments})</TabsTrigger>
+                </TabsList>
+                <TabsContent value="likes" className="mt-4 max-h-80 overflow-y-auto">
+                  <div className="space-y-4">
+                    {mockInteractions.likes.map(like => (
+                      <div key={like.id} className="flex items-center gap-4">
+                        <Avatar>
+                          <AvatarImage src={like.image} alt={like.name} data-ai-hint="person portrait" />
+                          <AvatarFallback>{like.initial}</AvatarFallback>
+                        </Avatar>
+                        <p className="font-medium">{like.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </TabsContent>
+                <TabsContent value="comments" className="mt-4 max-h-80 overflow-y-auto">
+                   <div className="space-y-6">
+                    {mockInteractions.comments.map(comment => (
+                      <div key={comment.id} className="flex items-start gap-4">
+                         <Avatar>
+                          <AvatarImage src={comment.image} alt={comment.name} data-ai-hint="person portrait"/>
+                          <AvatarFallback>{comment.initial}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <p className="font-medium">{comment.name}</p>
+                          <p className="text-sm text-muted-foreground">{comment.comment}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </TabsContent>
+              </Tabs>
+              <DialogFooter>
+                <Button type="button" variant="secondary" onClick={() => setSelectedUpdate(null)}>
+                    Close
+                </Button>
+              </DialogFooter>
+            </>
+          )}
+        </DialogContent>
+    </Dialog>
+    </>
   );
 }
