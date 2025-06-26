@@ -1,9 +1,9 @@
 import type {Metadata} from 'next';
-import { Manrope } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import { Toaster } from "@/components/ui/toaster"
 import './globals.css';
 
-const manrope = Manrope({
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
 })
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={`${manrope.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} font-sans antialiased`}>
         {children}
         <Toaster />
       </body>
