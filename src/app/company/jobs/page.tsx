@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -236,23 +237,37 @@ export default function CompanyDashboardPage() {
                                 data-ai-hint={job.hint}
                             />
                         </div>
-                        <div className="p-4 flex flex-col flex-grow">
+                        <div className="p-4 flex flex-col flex-grow relative">
                              <h3 className="font-semibold text-lg mb-2">{job.title}</h3>
+                             <Badge variant={job.status === "Open" ? "default" : "secondary"} className="w-fit mb-4">
+                                {job.status}
+                             </Badge>
+                             <div className="flex items-center gap-4 text-muted-foreground text-sm">
+                                <div className="flex items-center gap-1.5" title="Applicants">
+                                    <Users className="h-4 w-4" />
+                                    <span>{job.applicants}</span>
+                                </div>
+                                <div className="flex items-center gap-1.5" title="Likes">
+                                    <ThumbsUp className="h-4 w-4" />
+                                    <span>{job.likes}</span>
+                                </div>
+                                <div className="flex items-center gap-1.5" title="Comments">
+                                    <MessageCircle className="h-4 w-4" />
+                                    <span>{job.comments}</span>
+                                </div>
+                            </div>
+
                              <div className="flex-grow" />
-                             <div className="flex justify-between items-center mt-4 pt-4 border-t">
-                                <Badge variant={job.status === "Open" ? "default" : "secondary"}>
-                                    {job.status}
-                                </Badge>
-                                <Button 
-                                    variant="ghost"
-                                    size="icon"
-                                    onClick={() => setSelectedJob(job)}
-                                    className="text-primary hover:bg-primary/10"
-                                    aria-label="Open job details"
-                                >
-                                    <View className="h-5 w-5" />
-                                </Button>
-                             </div>
+                             
+                            <Button 
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => setSelectedJob(job)}
+                                className="absolute bottom-4 right-4 text-primary hover:bg-primary/10"
+                                aria-label="Open job details"
+                            >
+                                <View className="h-5 w-5" />
+                            </Button>
                         </div>
                     </Card>
                 ))}
@@ -505,5 +520,3 @@ export default function CompanyDashboardPage() {
     </>
   );
 }
-
-    
